@@ -1,0 +1,90 @@
+function M = motion_equn(x)
+fv=0;fu=0;ft=0;fs=0;fa=0;u=0;v=0;s=0;t=0;a=0;
+if(x(1)~="none")
+    if(strcmp(x(1),"find"))
+        fu=1;
+    end
+    if(x(1)~="find")
+        u=str2double(x(1));
+    end
+end
+if(x(2)~="none")
+    if(x(2)=="find")
+        fv=1;
+    end
+    if(x(2)~="find")
+        v=str2double(x(2));
+    end
+end
+if(x(3)~="none")
+    if(x(3)=="find")
+        ft=1;
+    end
+    if(x(3)~="find")
+        t=str2double(x(3));
+    end
+end
+if(x(4)~="none")
+    if(x(4)=="find")
+        fa=1;
+    end
+    if(x(4)~="find")
+        u=str2double(x(4));
+    end
+end
+if(x(5)~="none")
+    if(x(5)=="find")
+        fs=1;
+    end
+    if(x(5)~="find")
+        s=str2double(x(5));
+    end
+end
+if(x(6)=="1")
+    if(fv==1)
+        M=u+a*t;
+    end
+    if(fu==1)
+        M=v-a*t;
+    end
+    if(ft==1)
+        M=(v-u)/a;
+    end
+    if(fa==1)
+        M=(v-u)/t;
+    end
+end
+if(x(6)=="2")
+    if(fs==1)
+        M=u*t+1/2*a*t*t;
+    end
+    if(fu==1)
+        M=(s-1/2*a*t*t)/t;
+    end
+    if(fa==1)
+        M=(2*(s-u*t))/(t*t);
+    end
+    if(ft==1)
+        x=roots([1/2*a u s]);
+        for i=1:size(x)
+            if(x(i)>0)
+                M=[M x(i)];
+            end
+        end
+    end
+end
+if(x(6)=="3")
+    if(fv==1)
+        M=sqrt(u*u+2*a*s);
+    end
+    if(fu==1)
+        M=sqrt(v*v-2*a*s);
+    end
+    if(fs==1)
+        M=(v*v-u*u)/(2*a);
+    end
+    if(fa==1)
+        M=(v*v-u*u)/(2*s);
+    end
+end
+end
